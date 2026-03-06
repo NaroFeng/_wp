@@ -14,6 +14,11 @@
             margin: 0;
             position: relative;
             overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
         }
         body::before {
             content: '';
@@ -32,37 +37,6 @@
             0% { transform: translateX(-10px) translateY(-10px); }
             100% { transform: translateX(10px) translateY(10px); }
         }
-        .da-vinci-overlay {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 100px;
-            height: 100px;
-            background: transparent;
-            border: 1px solid rgba(44, 62, 80, 0.2);
-            border-radius: 50%;
-            z-index: -1;
-        }
-        .da-vinci-overlay::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: rgba(44, 62, 80, 0.2);
-            transform: translateY(-50%);
-        }
-        .da-vinci-overlay::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            width: 1px;
-            height: 100%;
-            background: rgba(44, 62, 80, 0.2);
-            transform: translateX(-50%);
-        }
         header {
             background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%);
             color: white;
@@ -70,9 +44,10 @@
             text-align: center;
         }
         .container {
-            max-width: 850px;
-            margin: -40px auto 40px;
-            padding: 0 20px;
+            width: 900px;
+            margin: 10px auto;
+            padding: 10px;
+            display: flex;
         }
         .card {
             background: white;
@@ -81,6 +56,12 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             margin-bottom: 30px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
         }
         .card:hover {
             transform: translateY(-5px);
@@ -110,10 +91,15 @@
         .footer {
             text-align: center;
             color: #bdc3c7;
-            padding-bottom: 40px;
+            padding: 10px;
+            width: 100%;
+            background: rgba(255,255,255,0.5);
+            border-top: 1px solid rgba(0,0,0,0.1);
         }
         .social-links {
-            margin-top: 20px;
+            margin: 15px 0 0 0;
+            display: flex;
+            justify-content: center;
         }
         .social-links a {
             display: inline-block;
@@ -127,10 +113,11 @@
         }
         /* Tab styles */
         .tabs {
+            flex: 0 0 200px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 20px;
+            flex-direction: column;
+            align-items: stretch;
+            margin-right: 10px;
         }
         .tab-button {
             background: #f0f2f5;
@@ -148,6 +135,8 @@
         }
         .tab-content {
             display: none;
+            width: 700px;
+            flex-shrink: 0;
         }
         .tab-content.active {
             display: block;
@@ -155,25 +144,30 @@
         /* Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 0 10px;
+                flex-direction: column;
+                padding: 10px;
+            }
+            .tabs {
+                flex: none;
+                margin-right: 0;
+                margin-bottom: 20px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             .card {
                 padding: 20px;
-            }
-            .tabs {
-                flex-direction: column;
-                align-items: center;
+                height: 250px;
+                overflow-y: auto;
             }
             .tab-button {
-                width: 80%;
-                max-width: 300px;
+                width: auto;
+                max-width: none;
             }
         }
     </style>
 </head>
 <body>
-
-<div class="da-vinci-overlay"></div>
 
 <div class="container">
     <div class="tabs">
@@ -262,11 +256,11 @@
     }
 
     const thoughts = [
-        "如果 AI 能思考，那麼思考的本質是什麼？",
-        "科技是否讓我們更孤獨，還是更連結？",
-        "程式碼是語言，哲學是思想，二者如何交織？",
-        "金門的寧靜，如何塑造一個思考者的靈魂？",
-        "創新是破壞，還是演化？"
+        "如果 AI 能思考，那麼思考的本質是什麼？在這個數位時代，我們常常將智慧與計算能力混為一談，但真正的思考或許超越了演算法的界限。",
+        "科技是否讓我們更孤獨，還是更連結？當我們透過螢幕連接全世界時，是否同時失去了面對面交流的深度與溫暖？",
+        "程式碼是語言，哲學是思想，二者如何交織？在編寫程式的過程中，我們是否也在建構自己的世界觀與價值體系？",
+        "金門的寧靜，如何塑造一個思考者的靈魂？在這個小島上，遠離都市的喧囂，讓我們有機會重新審視內心的聲音。",
+        "創新是破壞，還是演化？每一次科技進步，都在改變我們的生活方式，但我們是否準備好面對這些改變帶來的挑戰與機會？"
     ];
 
     document.getElementById('thoughtButton').addEventListener('click', function() {
