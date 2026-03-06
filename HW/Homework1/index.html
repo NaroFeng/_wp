@@ -4,13 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Naro | 探索程式與人生的邊界</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-            background-color: #fafafa;
+            background: linear-gradient(135deg, #fafafa 0%, #e0f7fa 100%);
             color: #333;
             line-height: 1.8;
             margin: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(76, 161, 175, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(44, 62, 80, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(76, 161, 175, 0.05) 0%, transparent 50%);
+            animation: flow 10s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+        @keyframes flow {
+            0% { transform: translateX(-10px) translateY(-10px); }
+            100% { transform: translateX(10px) translateY(10px); }
+        }
+        .da-vinci-overlay {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: transparent;
+            border: 1px solid rgba(44, 62, 80, 0.2);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        .da-vinci-overlay::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(44, 62, 80, 0.2);
+            transform: translateY(-50%);
+        }
+        .da-vinci-overlay::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background: rgba(44, 62, 80, 0.2);
+            transform: translateX(-50%);
         }
         header {
             background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%);
@@ -29,6 +80,11 @@
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
         h2 {
             color: #2c3e50;
@@ -56,43 +112,168 @@
             color: #bdc3c7;
             padding-bottom: 40px;
         }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #bdc3c7;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: #4ca1af;
+        }
+        /* Tab styles */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            background: #f0f2f5;
+            border: 1px solid #ccc;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+        .tab-button.active {
+            background: #4ca1af;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            .tab-button {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Naro</h1>
-    <p>金門大學資工系 | 程式邏輯與哲學思考的實踐者</p>
-</header>
+<div class="da-vinci-overlay"></div>
 
 <div class="container">
-    <div class="card">
-        <h2>關於我</h2>
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab('about')">關於我</button>
+        <button class="tab-button" onclick="openTab('processor')">人類處理器</button>
+        <button class="tab-button" onclick="openTab('symbiosis')">AI 共生</button>
+        <button class="tab-button" onclick="openTab('creator')">無名創造者</button>
+        <button class="tab-button" onclick="openTab('progress')">思考進度</button>
+        <button class="tab-button" onclick="openTab('trigger')">思辨觸發器</button>
+    </div>
+
+    <div id="about" class="tab-content active card">
+        <h1 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">老馮 Naro</h1>
+        <p style="text-align: center; color: #7f8c8d; margin-bottom: 30px;">金門大學資工系 | 程式邏輯與哲學思考的實踐者</p>
         <p>我目前就讀於國立金門大學資工系。對我而言，資工不只是寫程式，更是一種邏輯的修煉。我熱衷於探討<b>哲學與人生議題</b>，喜歡在繁雜的代碼與深奧的思想中尋找平衡點。</p>
         <p class="motto">「人生就像一段不斷重構的程式碼，目標是寫出最優雅的解法。」</p>
     </div>
 
-    <div class="card">
-        <h2>核心興趣與生活</h2>
-        <p>除了技術學習，我非常重視身心狀態的維持：</p>
+    <div id="processor" class="tab-content card">
+        <h2>人類處理器</h2>
+        <p>我將自己視為一個「純粹思考者」，專注於系統性的建構與跨維度的連結：</p>
         <div>
-            <span class="tag">🏸 羽球運動</span>
-            <span class="tag">🏋️ 健身訓練</span>
-            <span class="tag">💬 哲學思辨</span>
-            <span class="tag">🤝 深度對話</span>
+            <span class="tag">🔗 跨域整合</span>
+            <span class="tag">🧠 模式識別</span>
+            <span class="tag">📚 哲學綜合</span>
+            <span class="tag">🤖 AI 共生</span>
         </div>
-        <p style="margin-top: 15px;">我享受在球場上的揮汗如雨，也喜歡在健身房挑戰自我極限；而最快樂的時光，莫過於與三五好友聊聊人生，交換彼此對世界的看法。</p>
+        <p style="margin-top: 15px;">比起寫程式碼，我更迷戀於將 AI 視為實踐創意的義體，探索程式與人生的邊界。</p>
     </div>
 
-    <div class="card">
-        <h2>未來目標</h2>
-        <p>目前正致力於強化資工基礎學科，目標是順利考取<b>資工研究所</b>，在專業領域上進一步深造，將技術與人文思考做更好的結合。</p>
+    <div id="symbiosis" class="tab-content card">
+        <h2>AI 共生</h2>
+        <p>我相信人類直覺與 AI 執行的完美協作。原始思想遇上演算法力量，在這裡誕生創新。</p>
+        <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+            <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(45deg, #4ca1af, #2c3e50); opacity: 0.7; position: relative;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; background: #fff; position: absolute; top: 20px; left: 20px; display: flex; align-items: center; justify-content: center; font-size: 24px;">🧠</div>
+            </div>
+            <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(45deg, #2c3e50, #4ca1af); opacity: 0.7; position: relative; margin-left: -30px;">
+                <div style="width: 60px; height: 60px; border-radius: 50%; background: #fff; position: absolute; top: 20px; left: 20px; display: flex; align-items: center; justify-content: center; font-size: 24px;">🤖</div>
+            </div>
+        </div>
+        <p>這是「原始思想」與「演算法力量」的交匯點。</p>
+    </div>
+
+    <div id="creator" class="tab-content card" style="text-align: center; background: rgba(255,255,255,0.8);">
+        <blockquote style="font-size: 1.5rem; font-family: serif; color: #2c3e50; margin: 0;">
+            "知識流經我的神經，以演化，而非僅被記住。"
+        </blockquote>
+        <p style="margin-top: 10px; color: #7f8c8d;">— 無名創造者</p>
+    </div>
+
+    <div id="progress" class="tab-content card">
+        <h2>思考進度</h2>
+        <p>持續進行的思考專案：</p>
+        <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 10px;"><strong>AI 倫理的未來</strong> <span class="tag">綜合中</span></li>
+            <li style="margin-bottom: 10px;"><strong>能源科技與未來</strong> <span class="tag">發散中</span></li>
+            <li style="margin-bottom: 10px;"><strong>科技中的跨域整合</strong> <span class="tag">探索中</span></li>
+        </ul>
+    </div>
+
+    <div id="trigger" class="tab-content card" style="text-align: center;">
+        <h2>思辨觸發器</h2>
+        <button id="thoughtButton" style="background: #4ca1af; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 1rem; transition: background 0.3s ease;" onmouseover="this.style.background='#2c3e50'" onmouseout="this.style.background='#4ca1af'">產生火花</button>
+        <p id="thoughtOutput" style="margin-top: 20px; font-style: italic; color: #7f8c8d;"></p>
     </div>
 </div>
 
 <div class="footer">
     <p>© 2026 Naro | 於金門島嶼。用心生活，用腦思考。</p>
+    <p style="font-size: 0.8rem; opacity: 0.5; margin-top: 10px;">24.4321° N, 118.3188° E</p>
+    <div class="social-links">
+        <a href="https://github.com/NaroFeng" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/hoshiny.f" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
 </div>
+
+<script>
+    function openTab(tabName) {
+        const tabContents = document.querySelectorAll('.tab-content');
+        const tabButtons = document.querySelectorAll('.tab-button');
+        tabContents.forEach(content => content.classList.remove('active'));
+        tabButtons.forEach(button => button.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    const thoughts = [
+        "如果 AI 能思考，那麼思考的本質是什麼？",
+        "科技是否讓我們更孤獨，還是更連結？",
+        "程式碼是語言，哲學是思想，二者如何交織？",
+        "金門的寧靜，如何塑造一個思考者的靈魂？",
+        "創新是破壞，還是演化？"
+    ];
+
+    document.getElementById('thoughtButton').addEventListener('click', function() {
+        const randomThought = thoughts[Math.floor(Math.random() * thoughts.length)];
+        document.getElementById('thoughtOutput').textContent = randomThought;
+    });
+</script>
 
 </body>
 </html>
