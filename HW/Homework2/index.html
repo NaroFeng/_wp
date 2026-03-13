@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多種表單元素展示</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>多種表單元素展示</h1>
+        <form action="#" method="post">
+            <!-- 1. 文字輸入 -->
+            <div class="form-group">
+                <label for="name">姓名 (文字輸入):</label>
+                <input type="text" id="name" name="name" placeholder="請輸入您的姓名">
+            </div>
+
+            <!-- 帳號 -->
+            <div class="form-group">
+                <label for="username">帳號 (文字輸入):</label>
+                <input type="text" id="username" name="username" placeholder="請輸入您的帳號" pattern="[A-Za-z0-9]+">
+            </div>
+
+            <!-- 密碼 -->
+            <div class="form-group">
+                <label for="password">密碼 (密碼輸入):</label>
+                <input type="password" id="password" name="password" placeholder="請輸入您的密碼" pattern="[A-Za-z0-9]+">
+            </div>
+
+            <!-- 2. 下拉選單 -->
+            <div class="form-group">
+                <label for="country">國家 (下拉選單):</label>
+                <select id="country" name="country">
+                    <option value="">請選擇</option>
+                    <option value="tw">台灣</option>
+                    <option value="jp">日本</option>
+                    <option value="us">美國</option>
+                    <option value="kr">韓國</option>
+                    <option value="cn">中國</option>
+                    <option value="gb">英國</option>
+                    <option value="ca">加拿大</option>
+                    <option value="au">澳洲</option>
+                    <option value="de">德國</option>
+                    <option value="fr">法國</option>
+                    <option value="it">義大利</option>
+                    <option value="es">西班牙</option>
+                    <option value="nl">荷蘭</option>
+                    <option value="se">瑞典</option>
+                    <option value="no">挪威</option>
+                    <option value="dk">丹麥</option>
+                    <option value="fi">芬蘭</option>
+                    <option value="ch">瑞士</option>
+                    <option value="at">奧地利</option>
+                </select>
+            </div>
+
+            <!-- 3. 勾選框 -->
+            <div class="form-group">
+                <label>興趣 (勾選框，可複選):</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="interest" value="reading">閱讀</label>
+                    <label><input type="checkbox" name="interest" value="sports">運動</label>
+                    <label><input type="checkbox" name="interest" value="music">音樂</label>
+                    <label><input type="checkbox" name="interest" value="travel">旅遊</label>
+                    <label><input type="checkbox" name="interest" value="cooking">烹飪</label>
+                    <label><input type="checkbox" name="interest" value="painting">繪畫</label>
+                    <label><input type="checkbox" name="interest" value="photography">攝影</label>
+                    <label><input type="checkbox" name="interest" value="gaming">遊戲</label>
+                    <label><input type="checkbox" name="interest" value="movies">電影</label>
+                    <label><input type="checkbox" name="interest" value="dancing">舞蹈</label>
+                    <label><input type="checkbox" name="interest" value="yoga">瑜伽</label>
+                    <label><input type="checkbox" name="interest" value="swimming">游泳</label>
+                    <label><input type="checkbox" name="interest" value="running">跑步</label>
+                    <label><input type="checkbox" name="interest" value="writing">寫作</label>
+                    <label><input type="checkbox" name="interest" value="gardening">園藝</label>
+                    <label><input type="checkbox" name="interest" value="fishing">釣魚</label>
+                    <label><input type="checkbox" name="interest" value="hiking">登山</label>
+                    <label><input type="checkbox" name="interest" value="cycling">騎車</label>
+                    <label><input type="checkbox" name="interest" value="singing">唱歌</label>
+                </div>
+            </div>
+
+            <!-- 4. 單選按鈕 -->
+            <div class="form-group">
+                <label>性別 (單選按鈕):</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="male">男性</label>
+                    <label><input type="radio" name="gender" value="female">女性</label>
+                    <label><input type="radio" name="gender" value="other">其他</label>
+                </div>
+            </div>
+
+            <!-- 5. 日期選擇 -->
+            <div class="form-group">
+                <label for="birthdate">出生日期 (日期選擇):</label>
+                <input type="date" id="birthdate" name="birthdate">
+            </div>
+
+            <!-- 6. 數字輸入 -->
+            <div class="form-group">
+                <label for="age">年齡 (數字輸入):</label>
+                <input type="number" id="age" name="age" min="1" max="120" placeholder="請輸入年齡">
+            </div>
+
+            <!-- 7. 文字區域 -->
+            <div class="form-group">
+                <label for="message">留言 (文字區域):</label>
+                <textarea id="message" name="message" rows="4" placeholder="請輸入您的留言"></textarea>
+            </div>
+
+            <button type="submit">提交表單</button>
+        </form>
+    </div>
+</body>
+</html>
