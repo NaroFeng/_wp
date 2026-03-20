@@ -59,31 +59,35 @@
                 <div class="error-msg" style="color:red; display:none; font-size:14px; margin-top:5px;">此為必要欄位</div>
             </div>
 
-            <!-- 3. 勾選框 -->
+            <!-- 3. 標籤單選 (原為勾選框) -->
             <div class="form-group">
-                <label>興趣 (勾選框，可複選): <span style="color:red">*</span></label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="interest" value="reading">閱讀</label>
-                    <label><input type="checkbox" name="interest" value="sports">運動</label>
-                    <label><input type="checkbox" name="interest" value="music">音樂</label>
-                    <label><input type="checkbox" name="interest" value="travel">旅遊</label>
-                    <label><input type="checkbox" name="interest" value="cooking">烹飪</label>
-                    <label><input type="checkbox" name="interest" value="painting">繪畫</label>
-                    <label><input type="checkbox" name="interest" value="photography">攝影</label>
-                    <label><input type="checkbox" name="interest" value="gaming">遊戲</label>
-                    <label><input type="checkbox" name="interest" value="movies">電影</label>
-                    <label><input type="checkbox" name="interest" value="dancing">舞蹈</label>
-                    <label><input type="checkbox" name="interest" value="yoga">瑜伽</label>
-                    <label><input type="checkbox" name="interest" value="swimming">游泳</label>
-                    <label><input type="checkbox" name="interest" value="running">跑步</label>
-                    <label><input type="checkbox" name="interest" value="writing">寫作</label>
-                    <label><input type="checkbox" name="interest" value="gardening">園藝</label>
-                    <label><input type="checkbox" name="interest" value="fishing">釣魚</label>
-                    <label><input type="checkbox" name="interest" value="hiking">登山</label>
-                    <label><input type="checkbox" name="interest" value="cycling">騎車</label>
-                    <label><input type="checkbox" name="interest" value="singing">唱歌</label>
-                </div>
-                <div class="error-msg" style="color:red; display:none; font-size:14px; margin-top:5px;">此為必要欄位</div>
+                <label for="interest-select">興趣 (清單選擇): <span style="color:red">*</span></label>
+                <select id="interest-select">
+                    <option value="">請選擇興趣加入清單...</option>
+                    <option value="reading">閱讀</option>
+                    <option value="sports">運動</option>
+                    <option value="music">音樂</option>
+                    <option value="travel">旅遊</option>
+                    <option value="cooking">烹飪</option>
+                    <option value="painting">繪畫</option>
+                    <option value="photography">攝影</option>
+                    <option value="gaming">遊戲</option>
+                    <option value="movies">電影</option>
+                    <option value="dancing">舞蹈</option>
+                    <option value="yoga">瑜伽</option>
+                    <option value="swimming">游泳</option>
+                    <option value="running">跑步</option>
+                    <option value="writing">寫作</option>
+                    <option value="gardening">園藝</option>
+                    <option value="fishing">釣魚</option>
+                    <option value="hiking">登山</option>
+                    <option value="cycling">騎車</option>
+                    <option value="singing">唱歌</option>
+                </select>
+                <div id="interest-tags" class="tags-container"></div>
+                <!-- 隱藏的 input 用來儲存標籤值並讓原本的表單驗證能捕捉到 -->
+                <input type="hidden" id="interest-hidden" name="interest">
+                <div class="error-msg" id="interest-error" style="color:red; display:none; font-size:14px; margin-top:5px;">此為必要欄位</div>
             </div>
 
             <!-- 4. 單選按鈕 -->
@@ -122,6 +126,55 @@
     </div>
 
     <script>
+        // 標籤邏輯 (Interest Tags)
+        const interestSelect = document.getElementById('interest-select');
+        const interestTagsContainer = document.getElementById('interest-tags');
+        const interestHidden = document.getElementById('interest-hidden');
+        let selectedInterests = new Set();
+
+        if (interestSelect) {
+            interestSelect.addEventListener('change', function() {
+                const value = this.value;
+                const text = this.options[this.selectedIndex].text;
+                
+                if (value && !selectedInterests.has(value)) {
+                    selectedInterests.add(value);
+                    
+                    // 建立標籤外框
+                    const tag = document.createElement('span');
+                    tag.className = 'interest-tag';
+                    tag.dataset.value = value;
+                    tag.textContent = text;
+                    
+                    // 建立刪除按鈕 (叉叉)
+                    const removeBtn = document.createElement('span');
+                    removeBtn.className = 'remove-tag';
+                    removeBtn.innerHTML = '&times;';
+                    removeBtn.onclick = function() {
+                        selectedInterests.delete(value);
+                        tag.remove();
+                        updateHiddenInput();
+                    };
+                    
+                    tag.appendChild(removeBtn);
+                    interestTagsContainer.appendChild(tag);
+                    updateHiddenInput();
+                }
+                
+                // 重置選單
+                this.selectedIndex = 0;
+            });
+        }
+
+        function updateHiddenInput() {
+            interestHidden.value = Array.from(selectedInterests).join(',');
+            // 如果有值，順便檢查並隱藏錯誤訊息
+            if (selectedInterests.size > 0) {
+                const errorMsg = document.getElementById('interest-error');
+                if(errorMsg) errorMsg.style.display = 'none';
+            }
+        }
+
         document.getElementById('myForm').addEventListener('submit', function(event) {
             event.preventDefault(); // 防止跳轉 404
             
@@ -132,7 +185,7 @@
                 { id: 'username', type: 'input' },
                 { id: 'password', type: 'input' },
                 { id: 'country', type: 'select' },
-                { name: 'interest', type: 'checkbox' },
+                { id: 'interest-hidden', type: 'input' },
                 { name: 'gender', type: 'radio' },
                 { id: 'birthdate', type: 'input' },
                 { id: 'age', type: 'input' }
