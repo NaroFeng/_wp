@@ -1,5 +1,9 @@
 # Homework 2 表單元素說明
 
+本文件用VScode內github copilot做的 對話紀錄整理於README.md
+
+透過把作業內容貼上當作提示詞，加上後續看到問題後的修正做調整。
+
 本文件說明 `index.html` 中各表單欄位與 HTML 標籤的對應關係。
 
 ## 表單欄位對照表
