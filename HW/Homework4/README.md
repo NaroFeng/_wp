@@ -1,5 +1,8 @@
 # Homework 4: JavaScript 10 大程式練習
 
+利用Antigravity製作，透過貼上老師的AI提示詞產出js內容
+包括github的commit&push
+
 本專案 (`test.js`) 包含了 10 個由 AI 產生的 JavaScript 練習題，主要用於練習與熟悉 JavaScript 核心語法與資料結構，包含 `if`, `for`, `while`, `function`, `array`, `object`, 與 `json` 的操作。
 
 以下是 10 個練習題的詳細功能、程式介紹以及測試結果。您可以透過在終端機執行 `node test.js` 重現這些預期的輸出結果。
