@@ -1,4 +1,6 @@
 # Homework 3: 第一個 JavaScript 程式
+本作業使用openclaw製作以及commit、push
+透過給予作業內容的提示詞來進行處理。
 
 這個專案包含了基本的 JavaScript 練習。
 目前資料夾內包含：
